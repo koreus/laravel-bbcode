@@ -4,6 +4,11 @@ namespace PheRum\BBCode;
 
 use PheRum\BBCode\Traits\ArrayTrait;
 
+/**
+ * BBCodeParser is responsible for parsing BBCode into corresponding formatted HTML
+ * or other formats. It provides methods for enabling/disabling specific parsers,
+ * removing all BBCode tags, and handling case sensitivity during parsing operations.
+ */
 class BBCodeParser
 {
     use ArrayTrait;
@@ -165,6 +170,17 @@ class BBCodeParser
         }
 
         return $source;
+    }
+
+    /**
+     * Parse the BBCOde string and add nl2br and htmlspecialchars
+     * @param $source
+     * @param bool $caseInsensitive
+     * @return string
+     */
+    public function specialParse($source, $caseInsensitive = false)
+    {
+        return nl2br(htmlspecialchars($this->parse($source, $caseInsensitive)));
     }
 
     /**
